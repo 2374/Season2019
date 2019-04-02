@@ -24,6 +24,7 @@ public class MoveToPoint extends Command {
     @Override
     protected void execute() {
         if (direction > 0) {
+            System.out.println("Distance read: " + Robot.getLidar().getDistanceCm());
             while (Robot.getLidar().getDistanceCm() > stopDistance) {
                 Robot.getDrivetrain().tankDrive(-RobotMap.SPEED_DRIVE, -RobotMap.SPEED_DRIVE);
             }

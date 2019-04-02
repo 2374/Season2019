@@ -49,9 +49,9 @@ public class Robot extends TimedRobot {
 		leftCamera.setResolution(160, 120);
 		leftCamera.setBrightness(40);
 
-		UsbCamera rightCamera = CameraServer.getInstance().startAutomaticCapture("Right Camera", 1);
-		rightCamera.setResolution(160, 120);
-		rightCamera.setBrightness(40);
+		// UsbCamera rightCamera = CameraServer.getInstance().startAutomaticCapture("Right Camera", 1);
+		// rightCamera.setResolution(160, 120);
+		// rightCamera.setBrightness(40);
 	}
 	
 	@Override

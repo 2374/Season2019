@@ -35,8 +35,16 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void arcadeDrive(double throttleValue, double turnValue) {
-		double leftMotor = -(throttleValue / 1.2) + (turnValue / 2.0);
-		double rightMotor = -(throttleValue / 1.2) - (turnValue / 2.0);
+		double leftMotor = -throttleValue + turnValue;
+		double rightMotor = -throttleValue - turnValue;
+
+		frontLeft.set(ControlMode.PercentOutput, leftMotor);
+		frontRight.set(ControlMode.PercentOutput, -rightMotor);
+	}
+
+	public void arcadeDrive(double throttleValue, double turnValue, double powerLimiter, double turnLimiter) {
+		double leftMotor = -(throttleValue / powerLimiter) + (turnValue / turnLimiter);
+		double rightMotor = -(throttleValue / powerLimiter) - (turnValue / turnLimiter);
 
 		frontLeft.set(ControlMode.PercentOutput, leftMotor);
 		frontRight.set(ControlMode.PercentOutput, -rightMotor);

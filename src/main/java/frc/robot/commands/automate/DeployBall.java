@@ -10,12 +10,11 @@ public class DeployBall extends CommandGroup {
         requires (Robot.getDrivetrain());
         requires (Robot.getElevator());
 
-        //addSequential(new AlignToCenter(true), 5);
-        //addSequential(new MoveToPoint(RobotMap.STOP_DISTANCE, 1));
+        addSequential(new AlignToCenter(true));
         addSequential(new MoveElevatorToPoint(level));
+        addSequential(new MoveToPoint(RobotMap.STOP_DISTANCE, 1));
         addSequential(new ThrowBall(1));
-        //addSequential(new MoveToPoint(RobotMap.STOP_IDEAL_STOP_DISTANCE, -1));
-        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1_DEPLOY));
+        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1));
     }
 
 }

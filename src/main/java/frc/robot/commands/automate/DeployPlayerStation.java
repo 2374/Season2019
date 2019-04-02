@@ -7,17 +7,16 @@ import frc.robot.commands.automate.MoveElevatorToPoint;
 
 public class DeployPlayerStation extends CommandGroup {
 
-    public DeployPlayerStation(int destination) {
+    public DeployPlayerStation() {
         requires (Robot.getDrivetrain());
         requires (Robot.getElevator());
 
-        //addSequential(new AlignToCenter(false), 5);
-        addSequential(new MoveToPoint(RobotMap.STOP_DISTANCE, 1));
-        addSequential(new MoveElevatorToPoint(destination));
+        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1));
+        addSequential(new AlignToCenter(false));
         addSequential(new MoveToPoint(RobotMap.STOP_PLAYERSTATION_DISTANCE, 1));
-        addSequential(new MoveElevatorToPoint(destination + RobotMap.DEPLOY_OFFSET));
-        addSequential(new MoveToPoint(RobotMap.STOP_IDEAL_STOP_DISTANCE, -1));
-        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1_DEPLOY));
+        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1 + RobotMap.DEPLOY_OFFSET));
+        addSequential(new MoveToPoint(RobotMap.STOP_DISTANCE, 1));
+        addSequential(new MoveElevatorToPoint(RobotMap.ELEVATOR_HATCH_1));
 
     }
 

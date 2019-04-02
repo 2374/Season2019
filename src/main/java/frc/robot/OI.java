@@ -3,14 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.KeypadTeleop;
-import frc.robot.commands.automate.DeployBall;
+import frc.robot.commands.SpeedMode;
 
 public class OI {
 
+	private boolean isSpeeding;
+	private JoystickButton speedButton;
+
 	private XboxController driver;
 	private XboxController operator;
-
-	private JoystickButton test;
 
 	private JoystickButton button1;
 	private JoystickButton button2;
@@ -27,6 +28,8 @@ public class OI {
 		driver = new XboxController(RobotMap.CONTROLLER_DRIVER);
 		operator = new XboxController(RobotMap.CONTROLLER_OPERATOR);
 
+		this.speedButton = new JoystickButton(driver, RobotMap.CONTROLLER_BUTTON_X);
+
 		this.button1 = new JoystickButton(operator, RobotMap.CONTROLLER_BUTTON_A);
 		this.button2 = new JoystickButton(operator, RobotMap.CONTROLLER_BUTTON_B);
 		this.button3 = new JoystickButton(operator, RobotMap.CONTROLLER_BUTTON_X);
@@ -38,7 +41,7 @@ public class OI {
 		this.button9 = new JoystickButton(operator, RobotMap.CONTROLLER_BUTTON_M1);
 		this.button10 = new JoystickButton(operator, RobotMap.CONTROLLER_BUTTON_M2);
 
-		this.test = new JoystickButton(driver, RobotMap.CONTROLLER_BUTTON_START);
+		speedButton.whenPressed(new SpeedMode(!isSpeeding()));
 
 		button1.whenPressed(new KeypadTeleop(RobotMap.ELEVATOR_HATCH_1));
 		button2.whenPressed(new KeypadTeleop(RobotMap.ELEVATOR_HATCH_2));
@@ -50,19 +53,6 @@ public class OI {
 		button8.whenPressed(new KeypadTeleop(RobotMap.ELEVATOR_CARGO_INTAKE));
 		button9.whenPressed(new KeypadTeleop(RobotMap.ELEVATOR_ZERO_LIMIT));
 		button10.whenPressed(new KeypadTeleop(RobotMap.ELEVATOR_HATCH_1_PICKUP));
-
-		//button1.whenPressed(new DeployHatch(RobotMap.ELEVATOR_HATCH_1));
-		//button2.whenPressed(new DeployHatch(RobotMap.ELEVATOR_HATCH_2));
-		//button3.whenPressed(new DeployHatch(RobotMap.ELEVATOR_HATCH_3));
-		//button4.whenPressed(new DeployBall(RobotMap.ELEVATOR_BALL_1));
-		//button5.whenPressed(new DeployBall(RobotMap.ELEVATOR_BALL_2));
-		//button6.whenPressed(doNothing);
-		//button7.whenPressed(new DeployBall(RobotMap.ELEVATOR_CARGO_BALL));
-		//button8.whenPressed(new DeployHatch(RobotMap.ELEVATOR_HATCH_1));
-		//button9.whenPressed(new KeypadTeleop(0)); // changed from initially RobotMap.ELEVATOR_ZERO_LIMIT
-		//button10.whenPressed(doNothing);
-
-		test.whenPressed(new DeployBall(RobotMap.ELEVATOR_BALL_2));
 
 	}
 	
@@ -144,6 +134,14 @@ public class OI {
 		} else {
 			return axisValue;
 		}
+	}
+
+	public boolean isSpeeding() {
+		return isSpeeding;
+	}
+
+	public void setSpeeding(boolean isSpeeding) {
+		this.isSpeeding = isSpeeding;
 	}
 	
 }
